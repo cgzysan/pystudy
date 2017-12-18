@@ -28,3 +28,4 @@ res = fun_2('''{
             }
         }''')
 print(res)
+print(res["bakend"])

@@ -30,4 +30,10 @@ aFile.write("随记忆一直晃到现在\n")
 
 aFile.close()
 
+'''
+    1.read() 和 readline() 的区别
+    2.python中的 单引号和双引号
+    
+'''
+
 
