@@ -9,3 +9,6 @@ list2 = [i*2 for i in range(10)]
 
 print(list)
 print(list2)
+
+print("-".center(100, "-"))
+print("backend www.oldboy.org".split())
