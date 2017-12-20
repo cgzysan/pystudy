@@ -29,5 +29,6 @@ search_dict = {'0': 'www.oldboy.org', '1': 'www.12345.com.cn', '2': 'www.baidu.c
 
 search = input('输入查询的 key 值或者 value 值:')
 
+
 print(search_dict)
 print(search_dict[search])
