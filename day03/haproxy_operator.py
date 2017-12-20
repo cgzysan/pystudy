@@ -1,5 +1,7 @@
 # by ysan
 
+import sys, os
+
 '''
     读取文件保存在字典和列表中：
     backend_all_info >>> 所有的 backend 信息 dict
@@ -100,13 +102,13 @@ def query(query_input):
 
 # 添加功能
 def insert(insert_input):
-    if insert_input in backend_list:
+    if insert_input in backend_show_dict:
         insert_dict = {}
         insert_dict['name'] = input("请输入需要增加的server名称：").strip()
         insert_dict['IP'] = input("请输入需要增加的IP地址：").strip()
         insert_dict['weight'] = input("请输入需要增加的weight值：").strip()
         insert_dict['maxconn'] = input("请输入需要增加的maxconn值：").strip()
-        backend_name_key = backend_list[int(insert_input) - 1]
+        backend_name_key = backend_list[int(insert_input)]
 
         for dict in backend_all_info[backend_name_key]:  # 实现IP已存在，更新weight信息和maxconn信息
             if insert_dict['IP'] in dict.values():
@@ -116,14 +118,51 @@ def insert(insert_input):
             else:   # IP不存在，就将server增加到backend下
                 backend_all_info[backend_name_key].append(insert_dict)
 
+        backup(file, backend_name_key, backend_all_info)
+        print('''name：%{name} IP：{IP} weight：{weight} maxconn：{maxconn}已添加成功'''.format(**insert_dict))  # 提示添加成功
+
+
+# 修改功能
+def update(update_input):
+    update_dict = {}
+    if update_input in backend_show_dict:
+
+        pass
+    else:
+        update_input_return = input("需修改backend不存在，请重新输入：")
+        update(update_input_return)
+
 
 
 # 定义文档备份与回写功能
-def backup():
+def backup(file, backend_name_action, backend_backup_dict):
     file_new = "%s_new" % file
-
+    add_flag = False    # 为跳过原backend下server信息的写入
+    backend_name = "backend %s" % backend_name_action
     with open(file, 'r') as f_read , open(file_new, 'w+') as f_write:
         for line in f_read:
+            if line.strip() == backend_name:    # 如果读取的内容是 backend 内容
+                if backend_name_action not in backend_backup_dict:
+                    add_flag = True
+                    pass
+
+                else:
+                    f_write.write(line)
+                    for add_dict in backend_backup_dict[backend_name_action]:
+                        server_line_write = '\t\tserver {name} {IP} {weight} maxconn {maxconn}\n'
+                        f_write.write(server_line_write.format(**add_dict))
+                    add_flag = True
+
+            elif line.strip().startswith("server") and add_flag:
+                pass
+
+            else:
+                f_write.write(line)
+                add_flag =False
+
+    os.system('mv %s %s_backup' % (file, file))
+    os.system('mv %s %s' % (file_new, file))
+
 
 
 
@@ -142,14 +181,30 @@ def backend_exit():
 
 # 主函数
 file = 'haproxy'
+flag_main = True
 backend_list, backend_all_info = show_list(file)
 backend_show_dict = backend_show(backend_list)
 action_num = action_list()
 
-if action_num == '1':
-    query(input("请输入需要查询的backend编号，或者名称"))
-    backend_exit()
+while flag_main:
+    if action_num == '1':
+        query(input("请输入需要查询的backend编号，或者名称"))
+        flag_main = backend_exit()
+        break
 
-if action_num == '2':
-    insert("请输入需要添加的现有backend编号或新backend名称：")
+    if action_num == '2':
+        insert(input("请输入需要添加的现有backend编号或新backend名称："))
+        flag_main = backend_exit()
+        break
 
+    if action_num == '3':
+        update(input("请输入需要修改的backend编号或名称："))
+        flag_main = backend_exit()
+        break
+
+    if action_num == '5':
+        sys.exit()
+
+    elif action_num not in range(5):
+        print("\033[31;1m输入错误请重新输入！\033[0m")
+        flag_main = False
