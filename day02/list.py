@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # by ysan
 
+'''
+    列表(list)的方法
+    pop() 函数用于移除列表中的一个元素（默认最后一个元素），并且返回该元素的值。
+'''
 
 def test(info, *args):
     str1 = "".join(args)

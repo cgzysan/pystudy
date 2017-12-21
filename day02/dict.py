@@ -5,6 +5,9 @@ server_line_write = '\t\tserver {name} {IP} {weight} maxconn {maxconn}\n'
 add_dict = {'name': 'ysan', 'IP': '127.0.0.1', 'weight': 30, 'maxconn': 4000}
 
 '''
+    字典(dict)的方法
+    删除指定给定键所对应的值，返回这个值并从字典中把它移除。注意字典pop()方法与列表pop()方法作用完全不同。
+    
     字典前加** ， 为了打开参数列表
     列表钱加* 
     参考资料 >>> Unpacking Argument Lists  https://docs.python.org/2.7/tutorial/controlflow.html#unpacking-argument-lists
