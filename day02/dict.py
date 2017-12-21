@@ -26,9 +26,10 @@ print(str(add_dict), type(str(add_dict)))
 print("----------------------------字典的遍历 >> in 探索 ------------------------------------")
 
 search_dict = {'0': 'www.oldboy.org', '1': 'www.12345.com.cn', '2': 'www.baidu.com', '3': 'wwww.google.com'}
+print(search_dict)
 
 search = input('输入查询的 key 值或者 value 值:')
+if search in search_dict:
+    print("nice")
 
-
-print(search_dict)
-print(search_dict[search])
+# print(search_dict[search])

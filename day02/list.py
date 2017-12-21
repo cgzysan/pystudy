@@ -2,6 +2,14 @@
 # by ysan
 
 
+def test(info, *args):
+    str1 = "".join(args)
+    str2 = args
+    print(str1)
+    print(str2, type(str2))
+
+
+
 # 列表切片？ 切片是什么
 list1 = [1, 2, 3, 4, 5, 6]
 
@@ -13,3 +21,5 @@ print(list2)
 
 print("-".center(100, "-"))
 print("backend www.oldboy.org".split())
+
+test("ysan", "123456", "wo", "shi")

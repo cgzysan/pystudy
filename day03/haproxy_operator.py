@@ -36,7 +36,7 @@ def show_list(file):
                 server_list = []     # 清空server_list里的记录，遇到新backend可以输入新的server_list
 
             elif line.startswith('server'):
-                str = line.split();
+                str = line.split()
                 backend_info['name'] = str[1]
                 backend_info['IP'] = str[2]
                 backend_info['weight'] = str[4]
@@ -90,48 +90,79 @@ def action_list():
 
 # 查询功能
 def query(query_input):
-    if query_input in backend_show_dict:
-        backend_input = backend_show_dict[query_input]
-        print(backend_input, " :")
-        server_show(backend_input, backend_all_info)
+    while True:
+        if query_input in backend_show_dict:
+            backend_input = backend_show_dict[query_input]
+            print(backend_input, " :")
+            server_show(backend_input, backend_all_info)
+            break
 
-    elif query_input in backend_show_dict.values():
-        print(query_input, " :")
-        server_show(query_input, backend_all_info)
+        elif query_input in backend_show_dict.values():
+            print(query_input, " :")
+            server_show(query_input, backend_all_info)
+            break
+
+        else:   # 校验异常输入
+            query_input = input("输入错误，请重新输入：")
 
 
 # 添加功能
 def insert(insert_input):
-    if insert_input in backend_show_dict:
-        insert_dict = {}
-        insert_dict['name'] = input("请输入需要增加的server名称：").strip()
-        insert_dict['IP'] = input("请输入需要增加的IP地址：").strip()
-        insert_dict['weight'] = input("请输入需要增加的weight值：").strip()
-        insert_dict['maxconn'] = input("请输入需要增加的maxconn值：").strip()
-        backend_name_key = backend_list[int(insert_input)]
+    while True:
+        if insert_input in backend_show_dict:   # 添加原有backend下的server
+            insert_dict = {}
+            insert_dict['name'] = input("请输入需要增加的server名称：").strip()
+            insert_dict['IP'] = input("请输入需要增加的IP地址：").strip()
+            insert_dict['weight'] = input("请输入需要增加的weight值：").strip()
+            insert_dict['maxconn'] = input("请输入需要增加的maxconn值：").strip()
+            backend_name_key = backend_list[int(insert_input)]
 
-        for dict in backend_all_info[backend_name_key]:  # 实现IP已存在，更新weight信息和maxconn信息
-            if insert_dict['IP'] in dict.values():
-                dict['weight'] = insert_dict['weight']
-                dict['maxconn'] = insert_dict['maxconn']
+            for dict in backend_all_info[backend_name_key]:  # 实现IP已存在，更新weight信息和maxconn信息
+                if insert_dict['IP'] in dict.values():
+                    dict['weight'] = insert_dict['weight']
+                    dict['maxconn'] = insert_dict['maxconn']
+                    break
 
-            else:   # IP不存在，就将server增加到backend下
-                backend_all_info[backend_name_key].append(insert_dict)
+                else:   # IP不存在，就将server增加到backend下
+                    backend_all_info[backend_name_key].append(insert_dict)
 
-        backup(file, backend_name_key, backend_all_info)
-        print('''name：%{name} IP：{IP} weight：{weight} maxconn：{maxconn}已添加成功'''.format(**insert_dict))  # 提示添加成功
+            backup(file, backend_name_key, backend_all_info)
+            print('''name：%{name} IP：{IP} weight：{weight} maxconn：{maxconn}已添加成功'''.format(**insert_dict))  # 提示添加成功
+            break
 
+        else:   # 添加新backend下的server
+            insert_dict = {}
+            insert_dict['name'] = input("请输入%s下新增server名称：" % insert_input)
+            insert_dict['IP'] = input("请输入%s下新增IP地址：" % insert_input)
+            insert_dict['weight'] = input("请输入%s下新增weight值：" % insert_input)
+            insert_dict['maxconn'] = input("请输入%s下新增maxcoon值：" % insert_input)
+            backend_name_key = insert_input
+            backend_all_info[backend_name_key] = insert_dict    # 将新增backend和对应server存到字典中
+
+            file_new = "$s_new" % file
+            with open(file, 'r') as f_read, open(file_new, 'a+') as f_append:
+                for line in f_read:
+                    f_append.write(line)
+                f_append.write("\nbackend %s\n" % backend_name_key)   # 追加backend信息
+                server_line_write = "\t\tserver {name} {IP} weight {weight} maxconn {maxconn}\n"    # 追加server信息
+                f_append.write(server_line_write.format(**insert_dict))
+
+            os.system('mv %s %s_backup' % (file, file))     # 将file文件名改为file_backup
+            os.system('mv %s %s' % (file_new, file))        # 将file_new文件名改为file，实现备份
+            print("\nbackend %s" % backend_name_key)
+            print('''name：{name} IP：{IP} weight：{weight} maxconn：{maxconn}已添加成功'''.format(**insert_dict))   # 提示添加成功
+            break
 
 # 修改功能
 def update(update_input):
     update_dict = {}
-    if update_input in backend_show_dict:
-
+    if update_input in backend_show_dict:   # 判断输入是否存在
+        backend_server = backend_show_dict[update_input]    # 通过编号获取backend
+        update_confirm = input("是否需要修改该backend名称：%s；确认请按'y'，按任意键继续：" % backend_server)
         pass
     else:
         update_input_return = input("需修改backend不存在，请重新输入：")
         update(update_input_return)
-
 
 
 # 定义文档备份与回写功能
@@ -162,8 +193,6 @@ def backup(file, backend_name_action, backend_backup_dict):
 
     os.system('mv %s %s_backup' % (file, file))
     os.system('mv %s %s' % (file_new, file))
-
-
 
 
 # 退出功能
