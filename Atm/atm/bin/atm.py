@@ -5,8 +5,8 @@ import os, sys
 '''
     将项目的路径放到系统变量中，使可以导入同级目录文件，调用其方法
 '''
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(BASE_DIR)
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(base_dir)
 
 from core import main
 
