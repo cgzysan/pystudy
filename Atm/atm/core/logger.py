@@ -11,9 +11,9 @@
     logging.formatter参数参考：http://www.mamicode.com/info-detail-317126.html
 '''
 
-
 import logging
 from conf import settings
+
 
 def logger(log_type):
 
