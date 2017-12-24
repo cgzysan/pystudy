@@ -50,7 +50,7 @@ def logout(acc_data):
 def interactive(acc_data):
     '''
     interactive with user
-    :param user_data: user info data
+    :param acc_data: user info data
     :return:
     '''
     menu = u'''
