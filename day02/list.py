@@ -6,12 +6,19 @@
     pop() 函数用于移除列表中的一个元素（默认最后一个元素），并且返回该元素的值。
 '''
 
+dict_my = {'a': 1, 'b': 2, 'c': 3}
+
+
 def test(info, *args):
     str1 = "".join(args)
     str2 = args
-    print(str1)
+    print(str1, type(str1))
     print(str2, type(str2))
 
+
+def test_dict(info, **kwargs):
+    print(info)
+    print(kwargs)
 
 
 # 列表切片？ 切片是什么
@@ -26,4 +33,11 @@ print(list2)
 print("-".center(100, "-"))
 print("backend www.oldboy.org".split())
 
+
+print("--------- 列表的额外参数测试 ----------")
 test("ysan", "123456", "wo", "shi")
+
+print("--------- 字典的额外参数测试 ----------")
+test_dict("ysan", a=1, b=2, c=3)
+print(dict_my)
+print(*dict_my)

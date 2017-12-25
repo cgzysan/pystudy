@@ -13,7 +13,7 @@ def acc_auth(account, password):
     :param password:    credit card password
     :return:    if pass the authentication , return the account object, otherwise, return None
     '''
-    db_path = db_handler.db_handler(settings.DATABASE)
+    db_path = db_handler.db_handler(settings.DATA_BASE)
     account_file = "%s/%s.json" % (db_path, account)
     print("acc_auth", account_file)
     if os.path.isfile(account_file):
