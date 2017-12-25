@@ -1,0 +1,21 @@
+模块
+
+1. 定义
+    用来从逻辑上组织python代码（变量，函数，类，逻辑：实现一个功能），本质就是 .py 结尾的python文件
+    包的本质：用来从逻辑上组织模块的，本身就是一个目录（必须带有一个__init__.py的文件）
+
+2. 导入方法
+    import module_name
+    import module_name, ...
+    from module_name import *
+    from module_name import func_name as other_name
+
+        import module_name 和 from module_name import * 的区别
+        import module_name 是导入的module, 而第二种方法则是导入的module中的所有东西
+
+3. import 本质（路径搜索和搜索路径）
+    导入模块的本质就是把python文件解释一遍
+    导入包的本质就是在执行该包下的__init__.py文件
+
+4.
+
