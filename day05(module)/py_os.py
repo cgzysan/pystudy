@@ -26,6 +26,14 @@ os.listdir('dirname')
 # 删除一个文件
 os.remove()
 # 重命名文件/目录
+os.rename('oldname', 'newname')
 # 获取文件/目录信息
+os.stat('path/filename')
 # 输出操作系统特定的路径分隔符，win下为"\\", Linux下为"/"
-#
+os.sep
+# 输出当前平台使用的行终止符，win下为"\t\n", Linux下为"/n"
+os.linesep
+# 输出用于分割文件路径的字符串
+os.pathsep
+# 输出字符串指示当前使用平台 win下为"nt", Linux下为"posix"
+os.name
