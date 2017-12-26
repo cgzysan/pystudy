@@ -13,9 +13,19 @@
         import module_name 和 from module_name import * 的区别
         import module_name 是导入的module, 而第二种方法则是导入的module中的所有东西
 
+    from . import module_name 相对导入，从当前目录导入
+
 3. import 本质（路径搜索和搜索路径）
     导入模块的本质就是把python文件解释一遍
     导入包的本质就是在执行该包下的__init__.py文件
+    sys.path 就是寻找路径列表
 
-4.
+4. 导入优化
+    from module_name import func_name
 
+5. 模块的分类
+    a. 标准库
+        (1)时间 time 和 datetime
+        (2)
+    b. 开源模块
+    c. 自定义模块

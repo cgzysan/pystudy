@@ -37,11 +37,12 @@ def show_list(file):
                 server_list = []     # 清空server_list里的记录，遇到新backend可以输入新的server_list
 
             elif line.startswith('server'):
-                str = line.split()
-                backend_info['name'] = str[1]
-                backend_info['IP'] = str[2]
-                backend_info['weight'] = str[4]
-                backend_info['maxconn'] = str[6]
+                strs = line.split()
+                print(strs, len(strs))
+                backend_info['name'] = strs[1]
+                backend_info['IP'] = strs[2]
+                backend_info['weight'] = strs[4]
+                backend_info['maxconn'] = strs[6]
                 server_list.append(backend_info.copy())  # 将backend中的信息加到server_list中,此处需要用copy, 使数据不会随着父类改变而被改变
                 backend_all_info[backend_name] = server_list
 
@@ -225,13 +226,13 @@ def delete(delete_input):
                     server_delete_num = input("输入编号不存在，请重新输入：")  # 提示输入错误
 
 
-'''
-    定义文档备份与回写功能
-    file >>> 源文件
-    backend_name_action >>> backend 的名称    定位到增删改查的地方
-    backend_all_dict >>> backend 的所有信息，--> backend_all_info / 需要修改的信息
-'''
 def backup(file, backend_name_action, backend_all_dict, *backend_update_name):
+    '''
+        定义文档备份与回写功能
+        file >>> 源文件
+        backend_name_action >>> backend 的名称    定位到增删改查的地方
+        backend_all_dict >>> backend 的所有信息，--> backend_all_info / 需要修改的信息
+    '''
     file_new = "%s_new" % file
     add_flag = False    # 为跳过原backend下server信息的写入
     backend_name = "backend %s" % backend_name_action
@@ -254,7 +255,7 @@ def backup(file, backend_name_action, backend_all_dict, *backend_update_name):
                 else:
                     f_write.write(line)
                     for add_dict in backend_all_dict[backend_name_action]:
-                        server_line_write = '\t\tserver {name} {IP} {weight} maxconn {maxconn}\n'
+                        server_line_write = '\t\tserver {name} {IP} weight {weight} maxconn {maxconn}\n'
                         f_write.write(server_line_write.format(**add_dict))
                     add_flag = True
 

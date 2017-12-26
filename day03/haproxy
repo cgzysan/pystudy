@@ -31,6 +31,7 @@ backend www.oldboy.org
 
 backend www.12345.com.cn
 		server 100.1.7.8 100.1.7.8 weight 10 maxconn 1000
+		server ysan 127.0.0.1 weight 50 maxconn 2500
 
 backend www.baidu.com
         server 100.0.0.1 100.0.0.1 weight 80 maxconn 1000

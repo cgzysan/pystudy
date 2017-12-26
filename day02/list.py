@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # by ysan
+import sys
 
 '''
     列表(list)的方法
@@ -41,3 +42,10 @@ print("--------- 字典的额外参数测试 ----------")
 test_dict("ysan", a=1, b=2, c=3)
 print(dict_my)
 print(*dict_my)
+
+print("---------- 环境变量 ----------")
+sys_path = sys.path
+print(sys_path)
+
+for i in sys_path:
+    print(i)
