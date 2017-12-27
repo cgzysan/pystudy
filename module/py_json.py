@@ -3,6 +3,11 @@
 
 import json
 
+'''
+    json >>>    用于字符串 和 python数据类型间进行转换
+    pickle >>>  用于python特有的类型 和 python的数据类型间进行转换
+'''
+
 info = {
     'name': 'ysan',
     'age': 26,

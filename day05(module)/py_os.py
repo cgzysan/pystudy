@@ -2,8 +2,10 @@
 # by ysan
 
 import os
-
-# 切换目录填写路径的时候需要写'\'进行对分隔符'\'的转义，也可以用r”强制python不转义
+'''
+    用于提供系统级别的操作
+    切换目录填写路径的时候需要写'\'进行对分隔符'\'的转义，也可以用r”强制python不转义
+'''
 
 # 获取当前工作目录
 print(os.getcwd())
@@ -37,3 +39,29 @@ os.linesep
 os.pathsep
 # 输出字符串指示当前使用平台 win下为"nt", Linux下为"posix"
 os.name
+# 运行shell命令，直接显示
+os.system("bash command")
+# 获取系统环境变量
+os.environ
+# 返回path规范化的绝对路径
+os.path.abspath('path')
+# 讲path分割成目录和文件名二元组返回
+os.path.split('path')
+# 返回path的目录。其实就是os.path.split(path)的第一个元素
+os.path.dirname('path')
+# 返回path最后的文件名，如果以/或\结尾，那么会返回空值
+os.path.basename('path')
+# 如果path存在，返回True，如果path不存在，返回False
+os.path.exists('path')
+# 如果path是绝对路径，返回True
+os.path.isabs('path')
+# 如果path是一个存在的文件，返回True，否则返回False
+os.path.isfile('path')
+# 如果path是一个存在的文件夹，返回True，否则返回False
+os.path.isdir('path')
+# 将多个路径组合后返回，第一个绝对路径之前的参数将被忽略
+os.path.join('path1[, path2[, ...]]')
+# 返回path所指向的文件或者目录的最后存取时间
+os.path.getatime('path')
+# 返回path所指向的文件或者目录的最后修改时间
+os.path.getmtime('path')
