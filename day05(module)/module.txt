@@ -35,5 +35,6 @@ http://www.cnblogs.com/wupeiqi/articles/4963027.html
         (5)文件，压缩处理  shutil
         (6)json的上层封装 pickle , pickle的上层封装 shelve
         (7)configparser  生成和修改常见配置文档
+        (8)加密相关 hashlib  hmac
     b. 开源模块
     c. 自定义模块

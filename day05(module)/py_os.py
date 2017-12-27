@@ -33,7 +33,7 @@ os.rename('oldname', 'newname')
 os.stat('path/filename')
 # 输出操作系统特定的路径分隔符，win下为"\\", Linux下为"/"
 os.sep
-# 输出当前平台使用的行终止符，win下为"\t\n", Linux下为"/n"
+# 输出当前平台使用的行终止符，win下为"\r\n", Linux下为"/n"
 os.linesep
 # 输出用于分割文件路径的字符串
 os.pathsep
