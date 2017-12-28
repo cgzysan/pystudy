@@ -27,3 +27,8 @@ print(exp_time_mk)
 
 print("cur_time".center(50, "-"))
 print(cur_time)
+
+print("test".center(50, "-"))
+num1 = float("5")
+num2 = float("5")
+print(num1 * num2)

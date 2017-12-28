@@ -25,15 +25,29 @@ import re
     '\w'    匹配[A-Za-z0-9]
     '\W'    匹配非[A-Za-z0-9]
     's'     匹配空白字符、\t、\n、\r , re.search("\s+","ab\tc1\n3").group() 结果 '\t'
+    
+    '(?P<name>...)' 分组匹配 re.search("(?P<province>[0-9]{4})(?P<city>[0-9]{2})(?P<birthday>[0-9]{4})","371481199306143242").groupdict("city") 结果{'province': '3714', 'city': '81', 'birthday': '1993'}
 '''
 
 # 从头开始匹配
-re.match()
+# re.match('^a', 'abdca')
 # 匹配包含
-re.search()
+# re.search()
 # 把所有匹配到的字符放到以列表中的元素返回
-re.findall()
+# re.findall()
 # 以匹配到的字符当做列表分隔符
-re.split()
+# re.split()
 # 匹配字符并替换
-re.sub()
+# re.sub()
+
+s = "adfad asdfasdf asdfas asdfawef asd adsfas "
+info = re.findall('(\w+)\s+\w+', s)
+com = re.compile('(\w+)\s+\w+')
+print(info)
+print(com.findall(s))
+
+ss = '1 - 2 * ((60-30 + (-40/(5+6) + (5 + 5)) * (9-2*5/3 + 7 / 3*99/4*2998 + 10 * 568/14)) - (-4*3) / (16-3*2))'
+mul_div = re.compile('\d+\.*\d*[\*\/]+[\+\-]?\d+\.*\d*')
+aa = mul_div.findall(ss)
+print(aa)
+print(mul_div.search(ss).group())
