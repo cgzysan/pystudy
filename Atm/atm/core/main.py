@@ -209,7 +209,6 @@ def run():
     this function will be called right a way when the program started, here handles the user interaction stuff
     :return:
     '''
-    print("小缘")
     acc_data = auth.acc_login(user_data, access_logger)
     if user_data['is_authenticated']:
         user_data['account_data'] = acc_data

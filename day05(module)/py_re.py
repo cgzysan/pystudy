@@ -27,6 +27,10 @@ import re
     's'     匹配空白字符、\t、\n、\r , re.search("\s+","ab\tc1\n3").group() 结果 '\t'
     
     '(?P<name>...)' 分组匹配 re.search("(?P<province>[0-9]{4})(?P<city>[0-9]{2})(?P<birthday>[0-9]{4})","371481199306143242").groupdict("city") 结果{'province': '3714', 'city': '81', 'birthday': '1993'}
+    
+    re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）
+    M(MULTILINE): 多行模式，改变'^'和'$'的行为
+    S(DOTALL): 点任意匹配模式，改变'.'的行为
 '''
 
 # 从头开始匹配

@@ -56,33 +56,41 @@ def calculator(calc):
 
     print(ret)
 
-s = '1 - 2 * ((60-30 + (-40/5 + (5 + 5)) * (9-2*5/3 + 7 / 3*99/4*2998 + 10 * 568/14)) - (-4*3) / (16-3*2))'
-pattern = r'\([^()]+\)'
-sss = re.findall(pattern, s)
+# s = '1 - 2 * ((60-30 + (-40/5 + (5 + 5)) * (9-2*5/3 + 7 / 3*99/4*2998 + 10 * 568/14)) - (-4*3) / (16-3*2))'
+# pattern = r'\([^()]+\)'
+# comp = re.compile(pattern)
+# ii = comp.findall(s)
+# sss = re.findall(pattern, s)
+# print(ii)
+# s4 = re.sub(r'\(5 \+ 5\)', '10', s)
+# # s4 = s.replace(ii[0], '10')
+# print(s4)
+# print(sss)
 
-ssss = "9-2*5/3 + 7 / 3*99/4*2998 + 10 * 568/14"
+ssss = "-9-2.343*5/3 + 7 / 3.3412*9.9/4*2998.412 + 10.00000000000 * 562.8/14"
+expression = re.sub('\s*', '', ssss)  # 去除空格
 
-print(sss)
-
-a = re.findall(r"\d+", ssss)
-b = re.findall(r"[+\-*/]", ssss)
+a = re.findall(r"\d+\.?\d*", expression)
+b = re.findall(r"[+\-*/]", expression)
+print(ssss)
+print(expression)
 print(a)
 print(b)
-items = [1, 2, 3, 4, 5, 6, 7]
-oppe = ['-', '*', '/', '+', '/', '*', '/', '*', '+', '*', '/']
-
-print('/' in oppe)
-
-
-b = True
-for k, a in enumerate(items):
-    print(k, a)
-    if b:
-        items.pop(3)
-        b = False
-
-print(items)
-
-print("--------------------- calculator test ---------------------")
-calculator(ssss)
+# items = [1, 2, 3, 4, 5, 6, 7]
+# oppe = ['-', '*', '/', '+', '/', '*', '/', '*', '+', '*', '/']
+#
+# print('/' in oppe)
+#
+#
+# b = True
+# for k, a in enumerate(items):
+#     print(k, a)
+#     if b:
+#         items.pop(3)
+#         b = False
+#
+# print(items)
+#
+# print("--------------------- calculator test ---------------------")
+# calculator(ssss)
 
