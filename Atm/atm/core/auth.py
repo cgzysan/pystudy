@@ -20,7 +20,6 @@ def acc_auth(account, password):
             account_data = json.load(f_read)
             if account_data['password'] == password:
                 exp_time_stamp = time.mktime(time.strptime(account_data['expire_date'], "%Y-%m-%d"))
-                print("Account time >>>", exp_time_stamp)
                 if time.time() > exp_time_stamp:
                     print("\033[31;1mAccount [%s] has expired, please contact the back to get a new card!\033[0m" % account)
                 else:   # passed the authentication
@@ -28,7 +27,7 @@ def acc_auth(account, password):
             else:
                 print("\033[31;1mAccount ID or password is incorrect!\033[0m")
     else:
-        print("\033[31;1mAccuont [%s] does not exist!\033[0m" % account)
+        print("\033[31;1mAccount [%s] does not exist!\033[0m" % account)
 
 
 def acc_login(user_data, log_obj):

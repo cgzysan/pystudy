@@ -6,7 +6,7 @@ import logging
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DATABASE = {
+DATA_BASE = {
     'engine': 'file_storage',
     'name': 'accounts',
     'path': '%s/db' % BASE_DIR,

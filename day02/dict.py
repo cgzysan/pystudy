@@ -26,10 +26,35 @@ print(server_line_write.format(**add_dict))
 print(add_dict, type(add_dict))
 print(str(add_dict), type(str(add_dict)))
 
+menu = {
+    "Mobile phone": [
+        ("Iphone7", 6188),
+        ("Iphone7 plus", 7888),
+        ("Xiaomi5", 2888)
+    ],
+    "Car": [
+        ("Audi Q5", 490000),
+        ("Ferrari 488", 4888888)
+    ],
+    "Drink": [
+        ("Milk", 59),
+        ("Coffee", 30),
+        ("Tea", 311)
+    ]
+}
+
+for item in enumerate(menu["Mobile phone"]):
+    print(item)
+    print(item[0], item[1], item[1][0], item[1][1])
+
+
 print("----------------------------字典的遍历 >> in 探索 ------------------------------------")
 
 search_dict = {'0': 'www.oldboy.org', '1': 'www.12345.com.cn', '2': 'www.baidu.com', '3': 'wwww.google.com'}
 print(search_dict)
+
+for key in search_dict:
+    print(key)
 
 search = input('输入查询的 key 值或者 value 值:')
 if search in search_dict:

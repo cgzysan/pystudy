@@ -16,7 +16,7 @@ def logger(log_type, *user_name):
     if user_name:
         log_file = "%s/log/%s_%s" % (settings.BASE_DIR, user_name[0], settings.LOG_TYPES[log_type])
     else:
-        log_file = "%s/log/%s" % (settings.BASE_DIR, user_name[0], settings.LOG_TYPES[log_type])
+        log_file = "%s/log/%s" % (settings.BASE_DIR, settings.LOG_TYPES[log_type])
 
     fh = logging.FileHandler(log_file)
     fh.setLevel(settings.LOG_LEVEL)
