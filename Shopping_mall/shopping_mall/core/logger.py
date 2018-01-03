@@ -4,6 +4,7 @@
 import logging
 from conf import settings
 
+
 def logger(log_type, *user_name):
     # crate logger
     logger = logging.getLogger(log_type)
