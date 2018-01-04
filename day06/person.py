@@ -25,7 +25,7 @@ class People(object):
     def say_hello(self):
         print("hello, my name is %s, I have %s years old" % (self.name, self.age))
 
-    def go_shooping(self):
+    def go_shopping(self):
         print("My salary is %s, and I will shopping at once" % self.__salary)
 
     def __ge_salary(self):
@@ -60,5 +60,7 @@ class Woman(People):
 
 
 p1 = People('ysan', '25', 'm', '7000')
+w1 = Woman("an", '24', 'f', '6000')
+w1.say_hello()
 p1.say_hello()
 p1.go_shooping()
