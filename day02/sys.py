@@ -12,3 +12,18 @@ os.makedirs("yyy")
 os.name
 
 print(cmd_res)
+
+print("----------------------------------------------")
+list = []
+
+if list:
+    print("True")
+else:
+    print("False")
+
+list.append(3)
+
+if list:
+    print("True")
+else:
+    print("False")

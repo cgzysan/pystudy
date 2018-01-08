@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # by ysan
 
+from core import operation
 
 def welcome():
     '''
@@ -40,8 +41,14 @@ def system_student():
     --------------------------------------------------
     '''
     menu_dict = {
-
+        '1': 'operation.enroll_student()',
+        '2': 'operation.select_course()',
+        '3': 'operation.enroll_student()',
+        '4': 'operation.enroll_student()',
+        '5': 'operation.enroll_student()',
+        '6': 'operation.enroll_student()',
     }
+    interactive(menu, menu_dict)
 
 
 def system_teacher():
@@ -79,4 +86,3 @@ def run():
     :return:
     '''
     welcome()
-    interactive()
