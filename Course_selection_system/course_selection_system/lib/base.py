@@ -56,3 +56,18 @@ class BaseDb(object):
         :return:
         '''
         BaseDb.db.dump_pickle_data(BaseDb.db_path, base_data)
+
+    @staticmethod
+    def get_data():
+        base_data = BaseDb.db.load_pickle_data(BaseDb.db_path)
+        # 从文件中读取信息
+        schools = base_data['schools']
+        attr_students = 'students'
+        attr_teachers = 'teachers'
+        for school in schools:
+            students = getattr(school, attr_students)[attr_students]
+            teachers = getattr(school, attr_students)[attr_teachers]
+            for student in students:
+                account_id = student.account.account_id
+                student.account = student.account.get_account_data(account_id)
+

@@ -22,3 +22,35 @@ class School(object):
         self.students = students
         self.grades = grades
 
+    def show_info(self, attr=None):
+        '''
+        打印学校信息
+        :param attr:
+        :return:
+        '''
+        attr_list = ["courses", "teachers", "students", "grades"]
+
+        def show_attr_value(attr):
+            attr_value = getattr(self, attr)    # 字典类型
+            attr_value_list = attr_value[attr]  # 列表类型
+            print("{} :".format(attr))
+            for a in attr_value_list:  # 循环显示
+                # a.show_info()
+                if a.name:
+                    print("\033[34;1m{}\033[0m".format(a.name))
+                else:  # 显示人的帐户名
+                    print("\033[34;1m{}\033[0m".format(a.account.user_name))
+
+        if attr in attr_list:
+            show_attr_value(attr)
+        else:
+            for attr in attr_list:
+                show_attr_value(attr)
+
+    def add_attr_value(self, attr):
+        '''
+        学校添加属性
+        :return:
+        '''
+        attr_value = getattr(self, attr)
+        print(attr_value)

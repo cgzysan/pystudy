@@ -58,7 +58,7 @@ def func3(name, age):
 
 # deco(func1)
 # func2 = timer(func2)
-func1()
-func2()
+# func1()
+# func2()
 func3("ysan",26)
 

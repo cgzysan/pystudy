@@ -37,6 +37,20 @@ class Person(object):
         self.account = new_account
         return self
 
+    def sign_in(self):
+        '''
+        登录账户
+        :return:
+        '''
+        login_flag = False
+        user_name = input("Please input user name >>: ").strip()
+        password = input("Please input password >>: ").strip()
+        account = Account(user_name, password)
+        self.account = account.login()
+        if self.account:
+            login_flag = self.account
+        return login_flag
+
 
 class Student(Person):
     '''学生类'''

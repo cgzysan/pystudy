@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 # by ysan
 
+import os
+import pickle
+from conf import settings
+from lib.base import BaseDb
 from core import operation
+
+base_db = BaseDb()  # 第一次运行生成初始化数据库，后续登录读取数据库到内存
+
 
 def welcome():
     '''
@@ -42,9 +49,9 @@ def system_student():
     '''
     menu_dict = {
         '1': 'operation.enroll_student()',
-        '2': 'operation.select_course()',
+        '2': 'operation.select_course(base_db)',
         '3': 'operation.enroll_student()',
-        '4': 'operation.enroll_student()',
+        '4': 'operation.check_account_info()',
         '5': 'operation.enroll_student()',
         '6': 'operation.enroll_student()',
     }
@@ -80,9 +87,26 @@ def interactive(menu, menu_dict):
             print("\033[31;1mOption does not exist!\033[0m")
 
 
+def test():
+    db_path = "%s/%s/%s" % (settings.BASE_DIR, "db", "increment_id")
+    if os.path.exists(db_path):
+        with open(db_path, "rb") as f:
+            data1 = pickle.load(f)
+        print("increment_id", data1)
+
+    db_ss = "%s/%s/%s/%s" % (settings.BASE_DIR, "db", "accounts", "user_names")
+    if os.path.exists(db_ss):
+        with open(db_ss, "rb") as f:
+            data2 = pickle.load(f)
+        print("user_names", data2)
+    else:
+        print("不存在")
+
+
 def run():
     '''
     this function will be called right a way when the program started, here handles the user interaction stuff
     :return:
     '''
     welcome()
+    # test()
