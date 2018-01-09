@@ -84,7 +84,7 @@ def select_course(base_db):
         # 列出学校课程详情
         print("课程信息".center(50, '-'))
         base_data = base_db.get_data()
-        schools = base_db['schools']
+        schools = base_data['schools']
         for school in schools:
             print("学校名称：\033[34;1m{}\033[0m".format(school.school_name))
             school.show_info('courses')
