@@ -29,6 +29,8 @@ def check_login(func):
             print("\033[33;1mPlease sign in!\033[0m")
             person = Person()
             person.sign_in()
+            转换成子类保存
+
             if person.account:
                 user_data['is_authenticated'] = True
                 user_data['account_id'] = person.account.account_id
@@ -102,13 +104,13 @@ def select_course(base_db):
             for school in schools:
                 if school.school_name == s_school:
                     for course in school.courses['courses']:
-                        if course in s_course:
+                        if course.name == s_course:
                             student.select_course(user_data['account_id'], s_course)
                             school.add_attr_value('students')
 
 
 @check_login
-def check_account_info():
+def show_account_info():
     '''
     查看个人信息
     :return:

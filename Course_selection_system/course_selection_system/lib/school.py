@@ -13,7 +13,7 @@ class School(object):
         :param teachers:    讲师，字典类型，eg:{"teacher": []}
         :param courses:     课程，字典类型，eg:{"courses": []}
         :param students:    学员，字典类型，eg:{"students": []}
-        :param grades:       班级，字典类型，eg:{"grades": []}
+        :param grades:      班级，字典类型，eg:{"grades": []}
         '''
         self.school_name = school_name
         self.city_name = city_name

@@ -66,8 +66,19 @@ class BaseDb(object):
         attr_teachers = 'teachers'
         for school in schools:
             students = getattr(school, attr_students)[attr_students]
-            teachers = getattr(school, attr_students)[attr_teachers]
+            teachers = getattr(school, attr_teachers)[attr_teachers]
             for student in students:
                 account_id = student.account.account_id
                 student.account = student.account.get_account_data(account_id)
-
+                user_info_dict = student.account.user_info
+                student.name = user_info_dict.get['name']
+                student.sex = user_info_dict.get['sex']
+                student.age = user_info_dict.get['age']
+            for teacher in teachers:
+                account_id = teacher.account.account_id
+                teacher.account = teacher.account.get_account_data(account_id)
+                user_info_dict = teacher.account.user_info
+                teacher.name = user_info_dict.get['name']
+                teacher.sex = user_info_dict.get['sex']
+                teacher.age = user_info_dict.get['age']
+        return base_data

@@ -51,7 +51,7 @@ def system_student():
         '1': 'operation.enroll_student()',
         '2': 'operation.select_course(base_db)',
         '3': 'operation.enroll_student()',
-        '4': 'operation.check_account_info()',
+        '4': 'operation.show_account_info()',
         '5': 'operation.enroll_student()',
         '6': 'operation.enroll_student()',
     }
