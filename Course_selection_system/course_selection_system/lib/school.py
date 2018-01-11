@@ -47,10 +47,14 @@ class School(object):
             for attr in attr_list:
                 show_attr_value(attr)
 
-    def add_attr_value(self, attr):
+    def add_attr_value(self, attr, item):
         '''
         学校添加属性
         :return:
         '''
-        attr_value = getattr(self, attr)
-        print(attr_value)
+        attr_value = getattr(self, attr)    # 字典类型
+        attr_value_list = attr_value[attr]  # 列表类型
+        if item not in attr_value_list:
+            attr_value_list.append(item)
+        else:
+            print("{} already exist.".format(item))

@@ -22,3 +22,10 @@ info = {
 }
 
 print(type(info))
+
+for i in range(5):
+    print(i, "uuu")
+    if i == 3:
+        break
+else:
+    print("nonono")

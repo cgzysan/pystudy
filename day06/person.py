@@ -28,7 +28,7 @@ class People(object):
     def go_shopping(self):
         print("My salary is %s, and I will shopping at once" % self.__salary)
 
-    def __ge_salary(self):
+    def ge_salary(self):
         return self.__salary
 
     def __del__(self):
@@ -58,9 +58,15 @@ class Woman(People):
         super(Woman, self).say_hello()
         print("Woman say hello")
 
+    def say_byebye(self):
+        print("Women bye bye!", self.name, self.age)
+
 
 p1 = People('ysan', '25', 'm', '7000')
 w1 = Woman("an", '24', 'f', '6000')
 w1.say_hello()
 p1.say_hello()
-p1.go_shooping()
+
+print("--------------------强制类型转换--------------------")
+w2 = Woman(p1.name, p1.age, p1.sex, p1.ge_salary)
+w2.say_byebye()

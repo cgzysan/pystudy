@@ -51,6 +51,18 @@ class Person(object):
             login_flag = self.account
         return login_flag
 
+    def modify_info(self, account_id):
+        '''修改个人信息'''
+        print("modify_info", self.account.user_info)
+        for d in self.__dict__:
+            if d == 'account':
+                continue
+            else:
+                self.account.user_info[d] = getattr(self, d)
+        print("\033[32;1mUser info modify successed!\033[0m")
+        self.account.save_data(account_id)  # 保存数据
+        return True
+
 
 class Student(Person):
     '''学生类'''

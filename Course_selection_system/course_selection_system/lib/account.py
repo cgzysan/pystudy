@@ -147,11 +147,13 @@ class Account(object):
                     return account
                 else:
                     print("Account locked, [\033[31;1m%s\033[0m] sign in failed!" % self.user_name)
+                    return False
             else:
                 print("Password error, [\033[31;1m%s\033[0m] sign in failed!" % self.user_name)
                 return False
         else:
             print("User name [\033[31;1m%s\033[0m] does not exist!" % self.user_name)
+            return False
 
 
 class Admin(Account):

@@ -50,16 +50,33 @@ def system_student():
     menu_dict = {
         '1': 'operation.enroll_student()',
         '2': 'operation.select_course(base_db)',
-        '3': 'operation.enroll_student()',
+        '3': 'operation.show_grade_info(base_db)',
         '4': 'operation.show_account_info()',
-        '5': 'operation.enroll_student()',
-        '6': 'operation.enroll_student()',
+        '5': 'operation.modify_info()',
+        '6': 'callback("logout")',
     }
     interactive(menu, menu_dict)
 
 
 def system_teacher():
-    pass
+    '''
+    teacher system
+    :return:
+    '''
+    menu = '''
+----------------- 欢迎进入讲师系统 -----------------
+    1.  \033[33;1m授课排课\033[0m
+    2.  \033[34;1m查看学员信息\033[0m
+    3.  \033[35;1m修改学员成绩\033[0m
+    4.  \033[36;1m查看个人信息\033[0m
+    5.  \033[37;1m修改个人信息\033[0m
+    6.  \033[38;1m查看学校\033[0m
+    7.  后退（注销）
+--------------------------------------------------
+    '''
+    menu_dict = {
+        '1': 'operation.course_schedule(base_db)',
+    }
 
 
 def system_manager():
@@ -68,6 +85,19 @@ def system_manager():
 
 def logout():
     exit(" 谢谢使用 ".center(50, "#"))
+
+
+def callback(action=None):
+    # 注销帐户
+    if action == "logout":
+        operation.user_data = {
+            'account_id': None,
+            'is_authenticated': False,
+            'account_data': None,
+        }
+    break_flag = "b"
+    # print(operate.user_data)
+    return break_flag
 
 
 def interactive(menu, menu_dict):
