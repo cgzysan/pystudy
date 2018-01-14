@@ -4,11 +4,6 @@
   * @author: by Ysan
 '''
 
-'''
-  * @time: Created on ${DATE} ${TIME}
-  * @author: by Ysan
-'''
-
 import datetime
 
 

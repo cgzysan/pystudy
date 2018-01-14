@@ -13,8 +13,9 @@ server.listen()
 conn, addr = server.accept()
 print(conn, addr)
 
-data = conn.recv(1024)
-print("server receive: ", data)
-conn.send(data.upper())
+while True:
+    data = conn.recv(1024)
+    print("server receive: ", data)
+    conn.send(data.upper())
 
 server.close()

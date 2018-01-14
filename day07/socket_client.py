@@ -9,7 +9,11 @@ import socket
 
 client = socket.socket()
 client.connect(('localhost', 6969))
-client.send(b"Hello World!")
-data = client.recv(1024)
-print("client receive: ", data)
+
+while True:
+    di = input("send>>:")
+    client.send(di.encode('utf-8'))
+    data = client.recv(1024)
+    print("client receive: ", data.decode('utf_8'))
+
 client.close()
