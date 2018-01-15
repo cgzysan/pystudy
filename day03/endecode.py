@@ -9,7 +9,7 @@ print(sys.getdefaultencoding())
     str --------> unicode --------> str
     
     而 python3 中，
-        decode             encode
+           decode                 encode
     bytes --------> str(unicode) --------> bytes    
 '''
 
