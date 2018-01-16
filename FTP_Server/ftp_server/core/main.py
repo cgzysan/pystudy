@@ -4,6 +4,16 @@
   * @author: by Ysan
 '''
 
+import socketserver
+from lib.ftp_tcphandler import FTPTCPHandler
+
 
 def run():
-    print("主程序运行")
+    '''
+    The program run func
+    :return:
+    '''
+    print("FTP 服务端运行")
+    HOST, PORT = "localhost", 9999
+    server = socketserver.ThreadingTCPServer((HOST, PORT), FTPTCPHandler)
+    server.serve_forever()
