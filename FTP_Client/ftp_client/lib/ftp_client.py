@@ -10,15 +10,14 @@ import json
 import os
 import sys
 
-user_data = {
-    'is_authenticated': False,
-    'account_data': None
-}
-
 
 class FtpClient(object):
     def __init__(self):
         self.client = socket.socket()
+        self.user_data = {
+            'is_authenticated': False,
+            'account_data': None,
+        }
 
     def connect(self, ip, port):
         self.client.connect((ip, port))
@@ -42,14 +41,14 @@ class FtpClient(object):
         :param finished:    当前已完成文件大小
         :param percent:     已完成占总大小百分比
         '''
-        progress_mark = "=" * (percent/2)
+        progress_mark = ">" * int(percent / 2)
         sys.stdout.write("[%s/%s]%s>%s\r" % (total, finished, progress_mark, percent))
         sys.stdout.flush()
         if percent == 100:
             print('\n')
 
     def authentication(self):
-        print("登录")
+        print("login")
         account_name = input("please input your account name>>:").strip()
         account_pwd = input("please input your account password>>:").strip()
         md5_pwd = hashlib.new("md5", account_pwd.encode('utf-8')).hexdigest()
@@ -65,12 +64,12 @@ class FtpClient(object):
         elif auth_res == '2204':
             print("account hasn't registered!")
         else:
-            print("登录成功")
-            user_data['is_authenticated'] = True
-            user_data['account_data'] = json.loads(auth_res)
+            print("login success")
+            self.user_data['is_authenticated'] = True
+            self.user_data['account_data'] = json.loads(auth_res)
 
     def account_sign_in(self):
-        print("注册")
+        print("register")
         account_name = input("please input your account name>>:").strip()
         account_pwd = input("please input your account password>>:").strip()
         md5_pwd = hashlib.new("md5", account_pwd.encode('utf-8')).hexdigest()
@@ -84,9 +83,9 @@ class FtpClient(object):
         if sign_res == '2201':
             print("account had registered")
         else:
-            print("注册成功")
-            user_data['is_authenticated'] = True
-            user_data['account_data'] = json.loads(sign_res)
+            print("register success")
+            self.user_data['is_authenticated'] = True
+            self.user_data['account_data'] = json.loads(sign_res)
 
     def interactive(self):
         menu = '''
@@ -99,7 +98,7 @@ class FtpClient(object):
             '2': 'authentication',
         }
         while True:
-            if not user_data['is_authenticated']:
+            if not self.user_data['is_authenticated']:
                 print(menu)
                 user_option = input(">>>").strip()
                 if user_option in menu_dict:
@@ -124,7 +123,7 @@ class FtpClient(object):
             file_name = cmd_split[1]
             if os.path.isfile(file_name):
                 file_size = os.stat(file_name).st_size
-                print("文件大小》》》", file_size)
+                print("file size>>>", file_size)
                 msg_dict = {
                     "action": "put",
                     "filename": file_name,
@@ -144,12 +143,12 @@ class FtpClient(object):
                         cur_percent = int(float(send_size) / file_size * 100)
                         if cur_percent > progress_percent:
                             progress_percent = cur_percent
-                            # self.show_progress(file_size, send_size, progress_percent)
+                            self.show_progress(file_size, send_size, progress_percent)
                     else:
-                        print("file upload success!")
                         f.close()
+                        print("file upload success!")
             else:
-                print(file_name, "is not exist")
+                print("%s is not exist!" % file_name)
         else:
             print("%s lack parameter!" % args[0])
 
@@ -164,3 +163,34 @@ class FtpClient(object):
             self.client.send(json.dumps(msg_dict).encode("utf-8"))
             # 防止粘包，等待服务器确认
             server_response = self.client.recv(1024).decode()
+            if server_response == '2205':
+                print("The file [%s] is not exist in FTP server!" % file_name)
+            else:
+                self.client.send(b'2203')
+                file_size = int(server_response)
+                recv_size = 0
+                progress_percent = 0
+                with open(file_name, 'wb') as f:
+                    while recv_size < file_size:
+                        data = self.client.recv(1024)
+                        f.write(data)
+                        recv_size += len(data)
+
+                        cur_percent = int(float(recv_size) / file_size * 100)
+                        if cur_percent > progress_percent:
+                            progress_percent = cur_percent
+                            self.show_progress(file_size, recv_size, progress_percent)
+                    else:
+                        print("file download success!")
+
+    def cmd_pwd(self, *args):
+        msg_dict = {
+            "action": "pwd"
+        }
+        self.client.send(json.dumps(msg_dict).encode("utf-8"))
+        server_response = self.client.recv(1024).decode()
+        print(server_response)
+
+    def cmd_exit(self):
+        sys.exit("Bye! %s" % self.user_data['account_data']['account_name'])
+

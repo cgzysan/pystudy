@@ -27,3 +27,6 @@ DATA_BASE = {
     'name': 'accounts',
     'path': '%s/db' % BASE_DIR,
 }
+
+HOST = "localhost"
+PORT = 9999
