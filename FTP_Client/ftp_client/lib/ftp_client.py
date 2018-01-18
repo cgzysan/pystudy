@@ -92,10 +92,12 @@ class FtpClient(object):
         --------------------- Welcome to FTP system ---------------------
         1. \033[33;1m注册\033[0m
         2. \033[34;1m登录\033[0m
+        3. \033[35;1m退出\033[0m
         '''
         menu_dict = {
             '1': 'account_sign_in',
             '2': 'authentication',
+            '3': 'cmd_exit',
         }
         while True:
             if not self.user_data['is_authenticated']:
@@ -123,7 +125,6 @@ class FtpClient(object):
             file_name = cmd_split[1]
             if os.path.isfile(file_name):
                 file_size = os.stat(file_name).st_size
-                print("file size>>>", file_size)
                 msg_dict = {
                     "action": "put",
                     "filename": file_name,
@@ -132,7 +133,7 @@ class FtpClient(object):
                 self.client.send(json.dumps(msg_dict).encode("utf-8"))
                 # 防止粘包，等待服务器确认
                 server_response = self.client.recv(1024).decode()
-                if server_response == "2203":
+                if server_response == '2203':
                     send_size = 0
                     progress_percent = 0
                     f = open(file_name, 'rb')
@@ -147,6 +148,8 @@ class FtpClient(object):
                     else:
                         f.close()
                         print("file upload success!")
+                elif server_response == '2206':
+                    print("You don't have permissions in current directory!")
             else:
                 print("%s is not exist!" % file_name)
         else:
@@ -165,6 +168,8 @@ class FtpClient(object):
             server_response = self.client.recv(1024).decode()
             if server_response == '2205':
                 print("The file [%s] is not exist in FTP server!" % file_name)
+            elif server_response == '2206':
+                print("You don't have permissions in current directory!")
             else:
                 self.client.send(b'2203')
                 file_size = int(server_response)
@@ -191,6 +196,54 @@ class FtpClient(object):
         server_response = self.client.recv(1024).decode()
         print(server_response)
 
-    def cmd_exit(self):
-        sys.exit("Bye! %s" % self.user_data['account_data']['account_name'])
+    def cmd_ls(self, *args):
+        msg_dict = {
+            "action": args[0]
+        }
+        self.client.send(json.dumps(msg_dict).encode("utf-8"))
+        server_response = self.client.recv(1024).decode()
+        self.client.send(b'2203')
+        recv_size = 0
+        while recv_size < int(server_response):
+            data = self.client.recv(1024)
+            sys.stdout.write(data.decode())
+            recv_size += len(data)
 
+    def cmd_cd(self, *args):
+        cmd = args[0]
+        cmd_split = cmd.split()
+        if len(cmd_split) == 2:
+            msg_dict = {
+                "action": cmd_split[0],
+                "path": cmd_split[1],
+            }
+            self.client.send(json.dumps(msg_dict).encode("utf-8"))
+            server_response = self.client.recv(1024).decode()
+            if server_response == '2207':
+                print("The current directory is root")
+            else:
+                print(server_response)
+        else:
+            print("The cmd has invalid parameter")
+            self.help()
+
+    def cmd_mkdir(self, *args):
+        cmd = args[0]
+        cmd_split = cmd.split()
+        if len(cmd_split) == 2:
+            msg_dict = {
+                "action": cmd_split[0],
+                "dir": cmd_split[1],
+            }
+            self.client.send(json.dumps(msg_dict).encode("utf-8"))
+            server_response = self.client.recv(1024).decode()
+            if server_response == '2208':
+                print("The file/directory of the same name already exists!")
+            elif server_response == '2206':
+                print("You don't have permissions in current directory!")
+            elif server_response == '2000':
+                print("Create directory success!")
+
+    def cmd_exit(self, *args):
+        self.client.shutdown(socket.SHUT_WR)
+        sys.exit("Bye!")
