@@ -19,6 +19,7 @@ event = threading.Event()
 
 def lighter():
     count = 0
+    event.set()
     while True:
         if count > 5 and count < 10:  # 改成红灯
             event.clear()   # 清标志位
@@ -36,7 +37,15 @@ def car(name):
     while True:
         if event.is_set():  # 代表绿灯
             print("[%s] running..." % name)
+            time.sleep(1)
         else:
             print("[%s] sees red light, waiting..." % name)
             event.wait()
             print("\033[34;1m[%s] green light is on, start going...\033[0m" % name)
+
+
+light = threading.Thread(target=lighter)
+light.start()
+
+ca = threading.Thread(target=car, args=("Tesla", ))
+ca.start()
