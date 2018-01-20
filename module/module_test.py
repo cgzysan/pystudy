@@ -7,6 +7,9 @@
 import re
 import os
 
+def func(i):
+    print("This is from [%s]" % i)
+
 # data = input(">>>:").strip()
 a = "E:\Ysan\python\pystudy\FTP_Server\ftp_server"
 b = "E:\Ysan\python\pystudy\FTP_Server\ftp_server/home/ysan"
@@ -30,3 +33,8 @@ new2 = re.sub("/ysan$", "", new)
 print(new2)
 
 print(os.path.sep, type(os.path.sep))
+
+
+print("==================================================")
+for i in range(10):
+    func(i)
