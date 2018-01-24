@@ -37,5 +37,5 @@ with open('pickle_test', 'wb') as f_write:
 
 with open('pickle_test', 'rb') as f_read:
     str_data = pickle.load(f_read)
-    print(str_data)
+    print(str_data, type(str_data))
     str_data['func']('cgzysan')

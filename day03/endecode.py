@@ -31,3 +31,9 @@ b'\xe4\xbd\xa0\xe5\xa5\xbd'
 
 gbk_to_uft8 = str_gbk.decode('gbk').encode('utf-8')
 print(gbk_to_uft8)
+
+
+print(u"\u9f99\u51ef\u738b\u201d\u5e76\u62db\u52df\u4e86")
+
+for i in range(1, 26):
+    print(i)

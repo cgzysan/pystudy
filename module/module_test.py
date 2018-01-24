@@ -38,3 +38,9 @@ print(os.path.sep, type(os.path.sep))
 print("==================================================")
 for i in range(10):
     func(i)
+
+file_path = "E:/beevideos"
+if os.path.isdir(file_path):
+    print("存在文件夹")
+else:
+    print("检查路径")
