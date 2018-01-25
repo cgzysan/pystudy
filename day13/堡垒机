@@ -1,0 +1,22 @@
+集中式认证   ldap
+
+堡垒机：
+    权限控制
+    用户行为审计
+通过堡垒机记录，重新封装了SSH
+
+商业
+    齐治堡垒机
+
+开源（都不好使）
+    jumpserver
+
+底层不稳定python改的SSH不好使，用户并发高，不具备商业的稳定性和健壮性
+稳定：重新改写SSH源代码
+
+VMware workstation pro
+
+traceback 同时打印出异常的行号
+
+getpass.getpass() 不会明文显示
+getpass.getuser() 打印电脑用户名

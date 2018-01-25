@@ -6,6 +6,8 @@
 
 import re
 import os
+import pickle
+import json
 
 def func(i):
     print("This is from [%s]" % i)
@@ -44,3 +46,10 @@ if os.path.isdir(file_path):
     print("存在文件夹")
 else:
     print("检查路径")
+
+base_dir = "E:/beevideos/动漫"
+file_path = "%s/%s" % (base_dir, "dongman")
+with open(file_path, 'rb') as rf:
+    data = rf.read()
+    aa = pickle.loads(data)
+    print(aa)

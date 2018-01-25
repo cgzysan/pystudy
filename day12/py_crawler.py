@@ -2,6 +2,8 @@
 '''
   * @time: Created on 2018/01/24 09:11
   * @author: by Ysan
+
+    工作 获取蜜蜂视频的 动漫，少儿的视频json数据，导入自己的Launcher数据库中，方便搜索
 '''
 
 import pickle
@@ -78,6 +80,7 @@ def parse_data():
         dongman = json.dumps(root_dict)
         print(dongman, type(dongman))
         wf.write(dongman)
+
 
 # achieve_data()
 parse_data()
