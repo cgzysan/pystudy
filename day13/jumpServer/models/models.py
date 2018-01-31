@@ -11,6 +11,7 @@ from sqlalchemy_utils import ChoiceType
 
 Base = declarative_base()
 
+
 class Host(Base):
     __tablename__ = 'host'
     id = Column()
