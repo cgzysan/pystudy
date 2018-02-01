@@ -8,7 +8,7 @@
 import socket
 
 client = socket.socket()
-client.connect(('localhost', 6969))
+client.connect(('localhost', 8888))
 
 while True:
     di = input("send>>:")

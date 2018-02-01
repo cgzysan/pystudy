@@ -22,4 +22,3 @@ getpass.getpass() 不会明文显示
 getpass.getuser() 打印电脑用户名
 
 建表
-
