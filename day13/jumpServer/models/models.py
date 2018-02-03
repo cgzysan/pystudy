@@ -4,7 +4,7 @@
   * @author: by Ysan
 '''
 
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, UniqueConstraint, create_engine
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, UniqueConstraint, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy_utils import ChoiceType
@@ -78,6 +78,7 @@ class BindHost(Base):
     remoteuser_id = Column(Integer, ForeignKey('remote_user.id'))
     host = relationship('Host', backref='bind_hosts')
     remote_user = relationship('RemoteUser', backref='bind_hosts')
+    audit_logs = relationship('AuditLog')
 
     def __repr__(self):
         return "<%s -- %s >" % (self.host.ip, self.remote_user.username)
@@ -91,11 +92,36 @@ class UserProfile(Base):
     password = Column(String(128))
     bind_hosts = relationship('BindHost', secondary='user_m2m_bindhost', backref='user_profiles')
     host_groups = relationship('HostGroup', secondary='userprofile_m2m_hostgroup', backref='user_profiles')
+    audit_logs = relationship('AuditLog')
 
     def __repr__(self):
         return self.username
 
 
-if __name__ == '__main__':
-    engine = create_engine("mysql+pymysql://root:cgzysan@localhost:3306/jumpdb", encoding='utf-8', echo=False)
-    Base.metadata.create_all(engine)    # 创建表结构
+class AuditLog(Base):
+    __tablename__ = 'audit_log'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user_profile.id'))
+    bind_host_id = Column(Integer, ForeignKey('bind_host.id'))
+    action_choices = [
+        (0, 'CMD'),
+        (1, 'Login'),
+        (2, 'Logout'),
+        (3, 'GetFile'),
+        (4, 'SendFile'),
+        (5, 'Exception'),
+    ]
+    action_choices2 = [
+        (u'cmd', u'CMD'),
+        (u'login', u'Login'),
+        (u'logout', u'Logout'),
+        #(3,'GetFile'),
+        #(4,'SendFile'),
+        #(5,'Exception'),
+    ]
+    action_type = Column(ChoiceType(action_choices2))
+    cmd = Column(String(255))
+    date = Column(DateTime)
+
+    user_profile = relationship('UserProfile')
+    bind_host = relationship('BindHost')

@@ -47,9 +47,18 @@ if os.path.isdir(file_path):
 else:
     print("检查路径")
 
-base_dir = "E:/beevideos/动漫"
-file_path = "%s/%s" % (base_dir, "dongman")
-with open(file_path, 'rb') as rf:
-    data = rf.read()
-    aa = pickle.loads(data)
-    print(aa)
+# base_dir = "E:/beevideos/动漫"
+# file_path = "%s/%s" % (base_dir, "dongman")
+# with open(file_path, 'rb') as rf:
+#     data = rf.read()
+#     aa = pickle.loads(data)
+#     print(aa)
+
+print("---------===============---------断言 assert -----------===================------------")
+num = int(input("输入>>>>:").strip())
+try:
+    assert num >= 2
+    for i in range(num):
+        print(i)
+except AssertionError as e:
+    print("捕捉异常", e)
