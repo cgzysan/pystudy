@@ -53,6 +53,7 @@ else:
 #     data = rf.read()
 #     aa = pickle.loads(data)
 #     print(aa)
+print(r"bb", type(r"bb"))
 
 print("---------===============---------断言 assert -----------===================------------")
 num = int(input("输入>>>>:").strip())

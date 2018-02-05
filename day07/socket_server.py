@@ -29,8 +29,8 @@ location = {
 
 
 server = socket.socket()
-server.bind(('192.168.253.84', 8888))
-server.listen()
+server.bind(('192.168.1.165', 8888))
+server.listen(5)
 
 conn, addr = server.accept()
 print(conn, addr)

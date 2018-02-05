@@ -1,0 +1,198 @@
+HTML
+    1、一套规则，浏览器认识的规则。
+    2、开发者：
+        学习Html规则
+        开发后台程序：
+            - 写Html文件（充当模板的作用） ******
+            - 数据库获取数据，然后替换到html文件的指定位置（Web框架）
+
+    3、本地测试
+         - 找到文件路径，直接浏览器打开
+         - pycharm打开测试
+    4、编写Html文件
+        
+        - doctype对应关系
+        - html标签，标签内部可以写属性 ====> 只能有一个
+        - 注释：  <!--  注释的内容  -->
+    5、标签分类
+        - 自闭合标签
+            <meta charset="UTF-8">
+        - 主动闭合标签
+            title>老男孩</title>
+    6、
+        head标签中
+            - <meta  -> 编码，跳转，刷新，关键字，描述，IE兼容
+                    <meta http-equiv="X-UA-Compatible" content="IE=IE9;IE=IE8;" />
+            - title标签
+            - <link /> 搞图标，欠
+            - <style />欠
+            - <script> 欠
+    7、body标签
+         - 图标，  &nbsp;  &gt;   &lt;
+         - p标签，段落
+         - br，换行
+         ======== 小总结  =====
+            所有标签分为：
+                块级标签： div（白板），H系列（加大加粗），p标签（段落和段落之间有间距）
+                行内标签： span（白板）
+            标签之间可以嵌套
+            标签存在的意义，css操作，js操作
+            ps:chorme审查元素的使用
+                - 定位
+                - 查看样式
+        - h系列
+        - div
+        - span
+        - input系列 + form标签
+            input type='text'     - name属性，value="赵凡" 
+            input type='password' - name属性，value="赵凡" 
+            input type='submit'   - value='提交' 提交按钮，表单
+            input type='button'   - value='登录' 按钮
+            
+            input type='radio'    - 单选框 value，checked="checked"，name属性（name相同则互斥）
+            input type='checkbox' - 复选框 value, checked="checked"，name属性（批量获取数据）
+            input type='file'     - 依赖form表单的一个属性 enctype="multipart/form-data"
+            input type='rest'     - 重置
+    
+            <textarea >默认值</textarea>  - name属性
+            select标签            - name,内部option value, 提交到后台，size，multiple
+        
+        - a标签
+            - 跳转
+            - 锚     href='#某个标签的ID'    标签的ID不允许重复
+            
+        - img 
+             src
+             alt
+             title
+             
+        - 列表
+            ul
+                li
+            ol
+                li
+            dl
+                dt
+                dd
+        - 表格
+            table
+                thead
+                    tr
+                        th
+                tbody
+                    tr
+                        td
+            colspan = ''
+            rowspan = ''
+        - label
+            用于点击文件，使得关联的标签获取光标
+            <label for="username">用户名：</label>
+            <input id="username" type="text" name="user" />
+        - fieldset
+            legend
+        
+    - 20个标签
+CSS
+    
+    在标签上设置style属性：
+        background-color: #2459a2;
+        height: 48px;
+        ...
+    
+    编写css样式：
+        1. 标签的style属性
+        2. 写在head里面 style标签中写样式
+            - id选择区
+                  #i1{
+                    background-color: #2459a2;
+                    height: 48px;
+                  }
+                  
+            - class选择器 ******
+                
+                  .名称{
+                    ...
+                  }
+                  
+                  <标签 class='名称'> </标签>
+            
+            - 标签选择器
+                    div{
+                        ...
+                    }
+                    
+                    
+                    所有div设置上此样式
+            
+            - 层级选择器（空格） ******
+                   .c1 .c2 div{
+                        
+                   }
+            - 组合选择器（逗号） ******
+                    #c1,.c2,div{
+                        
+                   }
+            
+            - 属性选择器 ******
+                   对选择到的标签再通过属性再进行一次筛选
+                   .c1[n='alex']{ width:100px; height:200px; }
+                   
+            PS:
+                - 优先级，标签上style优先，编写顺序，就近原则
+            
+        2.5 css样式也可以写在单独文件中
+            <link rel="stylesheet" href="commons.css" />
+            
+        3、注释
+            /*   */
+    
+        4、边框
+             - 宽度，样式，颜色  (border: 4px dotted red;)
+             - border-left
+        
+        5、  
+            height，         高度 百分比
+            width，          宽度 像素，百分比
+            text-align:ceter, 水平方向居中
+            line-height，垂直方向根据标签高度
+            color、     字体颜色
+            font-size、 字体大小
+            font-weight 字体加粗
+        
+        6、float
+            让标签浪起来，块级标签也可以堆叠
+            老子管不住：
+                <div style="clear: both;"></div>
+            
+        7、display
+            display: none; -- 让标签消失
+            display: inline;
+            display: block;
+            display: inline-block;
+                     具有inline,默认自己有多少占多少
+                     具有block，可以设置高度，宽度，padding  margin
+            ******
+            行内标签：无法设置高度，宽度，padding  margin
+            块级标签：设置高度，宽度，padding  margin
+            
+            
+        8、padding  margin(0,auto)
+            
+            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

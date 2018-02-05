@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title-H5</title>
+</head>
+<body>
+<!--如果有文件要提交，需要给 form 标签加上 enctype=multipart/form-data-->
+    <form enctype="multipart/form-data">
+        <div>
+            <select>
+                <option value="1">北京</option>
+                <option value="2">上海</option>
+                <option value="3">南京</option>
+            </select>
+
+            <p>请选择性别：</p>
+            男：<input type="radio" name="gender" value="1">
+            女：<input type="radio" name="gender" value="2">
+
+            <p>爱好：</p>
+            篮球：<input type="checkbox" name="favor" value="1">
+            足球：<input type="checkbox" name="favor" value="1">
+            台球：<input type="checkbox" name="favor" value="1">
+            网球：<input type="checkbox" name="favor" value="1">
+            羽毛球：<input type="checkbox" name="favor" value="1">
+
+            <p>上传文件：</p>
+            <input type="file" name="fname">
+        </div>
+    </form>
+</body>
+</html>
