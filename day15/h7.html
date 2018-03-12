@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .hide{
+            display: none;
+        }
+        .item .header{
+            height: 35px;
+            background-color: #2459a2;
+            color: white;
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 48px;"></div>
+
+    <div style="width: 300px">
+        <div class="item">
+            <div id="i1" class="header" onclick="ChangeMenu('i1')">菜单1</div>
+            <div class="content">
+                <div>内容1</div>
+                <div>内容1</div>
+                <div>内容1</div>
+            </div>
+        </div>
+        <div class="item">
+            <div id="i2" class="header" onclick="ChangeMenu('i2')">菜单2</div>
+            <div class="content hide">
+                <div>内容2</div>
+                <div>内容2</div>
+                <div>内容2</div>
+            </div>
+        </div>
+        <div class="item">
+            <div id="i3" class="header" onclick="ChangeMenu('i3')">菜单3</div>
+            <div class="content hide">
+                <div>内容3</div>
+                <div>内容3</div>
+                <div>内容3</div>
+            </div>
+        </div>
+        <div class="item">
+            <div id="i4" class="header" onclick="ChangeMenu('i4')">菜单4</div>
+            <div class="content hide">
+                <div>内容4</div>
+                <div>内容4</div>
+                <div>内容4</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function ChangeMenu(nid) {
+            var current_header = document.getElementById(nid);
+            var item_list = current_header.parentElement.parentElement.children;
+            for (var i = 0; i < item_list.length; i++) {
+                var current_item = item_list[i];
+                current_item.children[1].classList.add('hide');
+            }
+            /*节点的下一个兄弟节点*/
+            current_header.nextElementSibling.classList.remove('hide');
+        }
+    </script>
+</body>
+</html>

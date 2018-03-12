@@ -29,7 +29,7 @@ location = {
 
 
 server = socket.socket()
-server.bind(('192.168.1.167', 8888))
+server.bind(('localhost', 6565))
 server.listen(5)
 
 conn, addr = server.accept()
@@ -46,5 +46,7 @@ while True:
     elif choice == '2':
         print()
         conn.send(json.dumps(location).encode("utf-8"))
+    elif choice == '3':
+        conn.send("".encode("utf-8"))
 
 server.close()
