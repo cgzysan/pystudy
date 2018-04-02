@@ -2,6 +2,7 @@
 # by ysan
 
 import re
+import json
 
 '''
     常用正则表达式符号
@@ -55,3 +56,20 @@ mul_div = re.compile('\d+\.*\d*[\*\/]+[\+\-]?\d+\.*\d*')
 aa = mul_div.findall(ss)
 print(aa)
 print(mul_div.search(ss).group())
+
+print("--------------------------------------04.02 测试一个正则---------------------------------------")
+
+data = [{u'\u5E74\u7EA7'}]
+print(data)
+ii = "初中精品微课：英语七年级下册"
+# pattern = "[\u4e00-\u9fa5]{1}?(?:年级)"
+pattern = r'[\u5E74]+'
+aa = r'[\u4e00-\u9fff]+'
+print("pattern", pattern)
+print("a ", aa)
+com = re.compile(pattern)
+com2 = re.compile(aa)
+res = com.match(ii)
+print(res)
+res2 = com2.match(ii)
+print(res2)
