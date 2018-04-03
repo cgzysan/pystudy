@@ -18,6 +18,11 @@ excel_path = "C:\\Users\\Administrator\\Desktop\\new xiaoman()\\格林数据(源
 data = xlrd.open_workbook(excel_path)
 sheet = data.sheet_by_index(1)
 values = sheet.row_values(0)
+print("有效行数", sheet.nrows)
+
+aa = sheet.row(0)
+print(type(aa), aa)
+print(aa[3])
 print(values)
 print(len(values))
 print(values[4])

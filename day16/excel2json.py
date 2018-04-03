@@ -45,7 +45,7 @@ def completion_excel():
         titles = table.row_values(0)
         for k, v in enumerate(titles):
             worksheet.write(0, k, v)
-        for i in range(1, 10196):
+        for i in range(1, table.nrows):
             row = table.row_values(i)
             # 补全年级的表
             if row[4] == "":
@@ -76,8 +76,8 @@ def excel2json():
         titles = table.row_values(0)
         result = {}
         result["middle_school"] = []
-        # excel文件表有 10196 行，所以做10196次循环
-        for i in range(1, 10196):
+        # 循环excel文件表的有效行数
+        for i in range(1, table.nrows):
             row = table.row_values(i)
             tmp = {}
             for index, title in enumerate(titles):
